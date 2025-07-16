@@ -4,43 +4,37 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 999;
   width: 100%;
+  margin-left: 280px; /* Default sidebar width */
+  transition: margin-left 0.3s ease;
+}
+
+.header.sidebar-collapsed {
+  margin-left: 70px; /* Collapsed sidebar width */
 }
 
 .header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+  max-width: none;
+  margin: 0;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 70px;
 }
 
-/* Logo Section */
-.header-logo {
+/* Header Title */
+.header-title {
   display: flex;
   align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: inherit;
 }
 
-.logo {
-  height: 40px;
-  width: auto;
-  transition: transform 0.3s ease;
-}
-
-.logo:hover {
-  transform: scale(1.05);
-}
-
-.logo-text {
+.header-title h1 {
   font-size: 1.5rem;
   font-weight: 600;
   color: #333;
+  margin: 0;
   letter-spacing: -0.5px;
 }
 
@@ -55,7 +49,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
 .nav-item {
@@ -66,29 +60,23 @@
   text-decoration: none;
   color: #555;
   font-weight: 500;
-  font-size: 1rem;
-  padding: 0.5rem 0;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
   transition: color 0.3s ease;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 6px;
 }
 
 .nav-link:hover {
   color: #f2b60f;
+  background: rgba(242, 182, 15, 0.1);
 }
 
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #f2b60f;
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover::after {
-  width: 100%;
+.nav-icon {
+  font-size: 1rem;
 }
 
 /* Header Actions */
@@ -96,6 +84,20 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.search-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.search-btn:hover {
+  background: rgba(242, 182, 15, 0.1);
 }
 
 /* Mobile Menu Toggle */
@@ -142,44 +144,40 @@
 /* Responsive Design */
 
 /* Tablet Styles */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .header {
+    margin-left: 260px;
+  }
+  
+  .header.sidebar-collapsed {
+    margin-left: 65px;
+  }
+  
   .header-container {
-    padding: 0 16px;
-    height: 60px;
-  }
-
-  .logo {
-    height: 35px;
-  }
-
-  .logo-text {
-    font-size: 1.3rem;
-  }
-
-  .nav-list {
-    gap: 1.5rem;
-  }
-
-  .nav-link {
-    font-size: 0.9rem;
+    padding: 0 1.5rem;
   }
 }
 
 /* Mobile Styles */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .header {
+    margin-left: 0;
+    padding-left: 70px; /* Space for mobile sidebar toggle */
+  }
+  
+  .header.sidebar-collapsed {
+    margin-left: 0;
+  }
+  
   .header-container {
-    padding: 0 12px;
-    height: 55px;
+    padding: 0 1rem;
+    height: 60px;
   }
-
-  .logo {
-    height: 30px;
+  
+  .header-title h1 {
+    font-size: 1.3rem;
   }
-
-  .logo-text {
-    font-size: 1.2rem;
-  }
-
+  
   .header-nav {
     display: none;
   }
@@ -211,56 +209,35 @@
   }
 
   .header-nav.mobile-open .nav-link {
-    display: block;
+    display: flex;
     padding: 1rem 20px;
     border-bottom: 1px solid #f0f0f0;
+    border-radius: 0;
   }
 
   .header-nav.mobile-open .nav-link:last-child {
     border-bottom: none;
   }
-
-  .header-nav.mobile-open .nav-link::after {
-    display: none;
-  }
 }
 
 /* Small Mobile Styles */
 @media (max-width: 480px) {
+  .header {
+    padding-left: 60px;
+  }
+  
   .header-container {
-    padding: 0 8px;
-    height: 50px;
+    padding: 0 0.75rem;
+    height: 55px;
   }
 
-  .logo {
-    height: 28px;
-  }
-
-  .logo-text {
+  .header-title h1 {
     font-size: 1.1rem;
   }
-
-  .header-logo {
-    gap: 8px;
-  }
-}
-
-/* Extra Small Screens */
-@media (max-width: 320px) {
-  .header-container {
-    padding: 0 6px;
-  }
-
-  .logo {
-    height: 26px;
-  }
-
-  .logo-text {
+  
+  .search-btn {
+    padding: 0.4rem;
     font-size: 1rem;
-  }
-
-  .header-logo {
-    gap: 6px;
   }
 }
 
