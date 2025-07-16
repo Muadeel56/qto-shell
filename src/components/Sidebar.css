@@ -218,6 +218,12 @@
   white-space: nowrap;
   opacity: 1;
   transition: opacity 0.3s ease;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.sidebar-menu-link:hover .sidebar-menu-text {
+  font-weight: 600;
 }
 
 .sidebar.collapsed .sidebar-menu-text {
@@ -230,6 +236,32 @@
   margin-right: 0;
   border-radius: 8px;
   margin: 0.25rem 0.5rem;
+  position: relative;
+}
+
+.sidebar.collapsed .sidebar-menu-link::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 0.5rem;
+  background: #333;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.collapsed .sidebar-menu-link:hover::before {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Sidebar Footer */

@@ -20,14 +20,16 @@ const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null }) => {
         title: activeMicroFrontend.name,
         subtitle: activeMicroFrontend.description,
         icon: activeMicroFrontend.icon(),
-        breadcrumbs: ['QTO House', activeMicroFrontend.name]
+        breadcrumbs: ['QTO House', activeMicroFrontend.name],
+        isMicroFrontend: true
       };
     }
     return {
       title: 'QTO Design System',
       subtitle: 'Dashboard',
       icon: <Home size={24} />,
-      breadcrumbs: ['QTO House', 'Dashboard']
+      breadcrumbs: ['QTO House', 'Dashboard'],
+      isMicroFrontend: false
     };
   };
 
@@ -50,8 +52,8 @@ const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null }) => {
                   </span>
                 ))}
               </div>
-              <h4>{headerInfo.title}</h4>
-              <span className="header-subtitle">{headerInfo.subtitle}</span>
+              <h4 className={headerInfo.isMicroFrontend ? 'micro-frontend-title' : ''}>{headerInfo.title}</h4>
+              {!headerInfo.isMicroFrontend && <span className="header-subtitle">{headerInfo.subtitle}</span>}
             </div>
           </div>
         </div>

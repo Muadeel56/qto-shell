@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { loadMicroFrontend } from '../services/microFrontendRegistry.jsx';
+import { loadMicroFrontend, getMicroFrontend } from '../services/microFrontendRegistry.jsx';
 import './MicroFrontendLoader.css';
 
 const MicroFrontendLoader = ({ microFrontendId, onError }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const containerRef = useRef(null);
+  
+  // Get micro frontend config for display name
+  const microFrontendConfig = microFrontendId ? getMicroFrontend(microFrontendId) : null;
 
   useEffect(() => {
     if (!microFrontendId) {
@@ -68,7 +71,7 @@ const MicroFrontendLoader = ({ microFrontendId, onError }) => {
     return (
       <div className="micro-frontend-loader">
         <div className="loader-spinner"></div>
-        <p>Loading {microFrontendId}...</p>
+        <p>Loading {microFrontendConfig?.name || microFrontendId}...</p>
       </div>
     );
   }
@@ -76,7 +79,7 @@ const MicroFrontendLoader = ({ microFrontendId, onError }) => {
   if (error) {
     return (
       <div className="micro-frontend-error">
-        <h3>Failed to load application</h3>
+        <h3>Failed to load {microFrontendConfig?.name || 'application'}</h3>
         <p>{error}</p>
         <button onClick={() => window.location.reload()}>
           Retry
