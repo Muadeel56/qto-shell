@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Home, Settings, User } from 'lucide-react';
 import logo from '../assets/logo.svg';
-import { getActiveMicroFrontends } from '../services/microFrontendRegistry';
+import { getActiveMicroFrontends } from '../services/microFrontendRegistry.jsx';
 import './Sidebar.css';
 
 const Sidebar = ({ isCollapsed, onToggle, activeMicroFrontend, onMicroFrontendChange }) => {
@@ -59,7 +60,9 @@ const Sidebar = ({ isCollapsed, onToggle, activeMicroFrontend, onMicroFrontendCh
                 data-tooltip="Dashboard"
                 onClick={() => handleMicroFrontendClick(null)}
               >
-                <span className="sidebar-menu-icon">🏠</span>
+                <span className="sidebar-menu-icon">
+                  <Home size={20} />
+                </span>
                 {!isCollapsed && <span className="sidebar-menu-text">Dashboard</span>}
               </button>
             </li>
@@ -77,7 +80,7 @@ const Sidebar = ({ isCollapsed, onToggle, activeMicroFrontend, onMicroFrontendCh
                   data-tooltip={mf.name}
                   onClick={() => handleMicroFrontendClick(mf.id)}
                 >
-                  <span className="sidebar-menu-icon">{mf.icon}</span>
+                  <span className="sidebar-menu-icon">{mf.icon()}</span>
                   {!isCollapsed && <span className="sidebar-menu-text">{mf.name}</span>}
                 </button>
               </li>
@@ -95,7 +98,9 @@ const Sidebar = ({ isCollapsed, onToggle, activeMicroFrontend, onMicroFrontendCh
                 data-tooltip="Settings"
                 onClick={() => setIsMobileOpen(false)}
               >
-                <span className="sidebar-menu-icon">⚙️</span>
+                <span className="sidebar-menu-icon">
+                  <Settings size={20} />
+                </span>
                 {!isCollapsed && <span className="sidebar-menu-text">Settings</span>}
               </button>
             </li>
@@ -106,7 +111,9 @@ const Sidebar = ({ isCollapsed, onToggle, activeMicroFrontend, onMicroFrontendCh
         <div className="sidebar-footer">
           {!isCollapsed && (
             <div className="sidebar-user">
-              <div className="user-avatar">👤</div>
+              <div className="user-avatar">
+                <User size={18} />
+              </div>
               <div className="user-info">
                 <span className="user-name">Admin</span>
                 <span className="user-role">Developer</span>

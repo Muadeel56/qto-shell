@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import MicroFrontendLoader from './MicroFrontendLoader';
+import { getMicroFrontend } from '../services/microFrontendRegistry.jsx';
 import './Layout.css';
 
 const Layout = ({ children }) => {
@@ -17,6 +18,11 @@ const Layout = ({ children }) => {
     // You can add error handling here, like showing a toast notification
   };
 
+  // Get the active micro-frontend configuration
+  const activeMicroFrontendConfig = activeMicroFrontend 
+    ? getMicroFrontend(activeMicroFrontend)
+    : null;
+
   return (
     <div className="layout">
       <Sidebar 
@@ -26,7 +32,10 @@ const Layout = ({ children }) => {
         onMicroFrontendChange={handleMicroFrontendChange}
       />
       <div className={`layout-content ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
-        <Header sidebarCollapsed={sidebarCollapsed} />
+        <Header 
+          sidebarCollapsed={sidebarCollapsed}
+          activeMicroFrontend={activeMicroFrontendConfig}
+        />
         <main className="main-content">
           {activeMicroFrontend ? (
             <MicroFrontendLoader 

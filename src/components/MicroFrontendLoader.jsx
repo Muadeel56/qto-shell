@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { loadMicroFrontend } from '../services/microFrontendRegistry';
+import { loadMicroFrontend } from '../services/microFrontendRegistry.jsx';
 import './MicroFrontendLoader.css';
 
 const MicroFrontendLoader = ({ microFrontendId, onError }) => {

@@ -198,7 +198,18 @@
   font-size: 1.2rem;
   width: 20px;
   text-align: center;
-  flex-shrink: 0;
+  color: #f2b60f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-menu-link:hover .sidebar-menu-icon {
+  color: #ffffff;
+}
+
+.sidebar-menu-link.active .sidebar-menu-icon {
+  color: #000;
 }
 
 .sidebar-menu-text {
@@ -251,6 +262,7 @@
   justify-content: center;
   font-size: 1rem;
   flex-shrink: 0;
+  color: #000;
 }
 
 .user-info {

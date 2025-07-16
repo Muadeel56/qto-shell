@@ -1,8 +1,11 @@
+import React from 'react';
+import { Calendar, Users, BarChart3, Handshake } from 'lucide-react';
+
 // Micro-frontend registry and loader service
 export const microFrontendRegistry = {
   attendance: {
     name: 'Attendance Portal',
-    icon: '📅',
+    icon: () => <Calendar size={20} />,
     url: 'https://portal.qto.company', // Development URL
     productionUrl: 'https://portal.qto.company',
     description: 'Employee attendance tracking and management',
@@ -11,7 +14,7 @@ export const microFrontendRegistry = {
   },
   hrm: {
     name: 'Human Resource Management',
-    icon: '👥',
+    icon: () => <Users size={20} />,
     url: 'http://localhost:3002',
     productionUrl: 'https://hrm.qto.com',
     description: 'Employee management and HR processes',
@@ -20,7 +23,7 @@ export const microFrontendRegistry = {
   },
   'project-management': {
     name: 'Project Management',
-    icon: '📊',
+    icon: () => <BarChart3 size={20} />,
     url: 'https://qtohouse.com',
     productionUrl: 'https://qtohouse.com',
     description: 'Project tracking and task management',
@@ -29,7 +32,7 @@ export const microFrontendRegistry = {
   },
   crm: {
     name: 'Customer Relationship Management',
-    icon: '🤝',
+    icon: () => <Handshake size={20} />,
     url: 'http://localhost:3004',
     productionUrl: 'https://crm.qto.com',
     description: 'Customer management and sales tracking',
