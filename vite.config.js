@@ -11,8 +11,8 @@ export default defineConfig({
     federation({
       name: 'qto_shell',
       remotes: {
-      qto_theme: 'http://localhost:4173/assets/remoteEntry.js',
-  },
+        qto_theme: 'http://localhost:5002/assets/remoteEntry.js',
+      },
       shared: ['react', 'react-dom'],
     }),
   ],
