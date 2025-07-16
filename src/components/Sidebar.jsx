@@ -35,7 +35,6 @@ const Sidebar = ({ isCollapsed, onToggle, activeMicroFrontend, onMicroFrontendCh
         <div className="sidebar-header">
           <div className="sidebar-logo">
             <img src={logo} alt="QTO Logo" className="sidebar-logo-img" />
-            {!isCollapsed && <span className="sidebar-logo-text">QTO House</span>}
           </div>
           
           {/* Toggle Button for Desktop */}
