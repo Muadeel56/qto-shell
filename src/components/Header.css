@@ -1,11 +1,13 @@
 /* Header Styles */
 .header {
-  background: #ffffff;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background: var(--color-bg-primary);
+  box-shadow: var(--shadow-md);
   position: sticky;
   top: 0;
   z-index: 999;
   width: 100%;
+  border-bottom: 1px solid var(--color-border);
+  transition: all var(--transition-normal);
 }
 
 .header-container {
@@ -37,15 +39,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(242, 182, 15, 0.1);
+  background: var(--color-primary-light);
   border-radius: 8px;
   flex-shrink: 0;
-  color: #f2b60f;
-  transition: all 0.3s ease;
+  color: var(--color-primary);
+  transition: all var(--transition-normal);
 }
 
 .header-title:has(.micro-frontend-title) .header-icon {
-  background: rgba(242, 182, 15, 0.2);
+  background: var(--color-primary-light);
   box-shadow: 0 2px 8px rgba(242, 182, 15, 0.3);
   transform: scale(1.05);
 }
@@ -65,36 +67,36 @@
 
 .breadcrumb-item {
   font-size: 0.75rem;
-  color: #888;
+  color: var(--color-text-muted);
   font-weight: 400;
-  transition: color 0.3s ease;
+  transition: color var(--transition-normal);
 }
 
 .header-title:has(.micro-frontend-title) .breadcrumb-item:last-child {
-  color: #f2b60f;
+  color: var(--color-primary);
   font-weight: 600;
 }
 
 .breadcrumb-separator {
   font-size: 0.75rem;
-  color: #ccc;
+  color: var(--color-text-light);
   margin: 0 0.25rem;
 }
 
 .header-title h4 {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #333;
+  color: var(--color-text);
   margin: 0;
   letter-spacing: -0.5px;
   line-height: 1.2;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }
 
 .header-title h4.micro-frontend-title {
   font-size: 1.4rem;
   font-weight: 700;
-  color: #f2b60f;
+  color: var(--color-primary);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   position: relative;
   filter: drop-shadow(0 0 4px rgba(242, 182, 15, 0.3));
@@ -130,7 +132,7 @@
 
 .header-subtitle {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--color-text-secondary);
   font-weight: 400;
   line-height: 1;
 }
@@ -155,11 +157,11 @@
 
 .nav-link {
   text-decoration: none;
-  color: #555;
+  color: var(--color-text-secondary);
   font-weight: 500;
   font-size: 0.9rem;
   padding: 0.5rem 0.75rem;
-  transition: color 0.3s ease;
+  transition: color var(--transition-normal);
   position: relative;
   display: flex;
   align-items: center;
@@ -168,13 +170,13 @@
 }
 
 .nav-link:hover {
-  color: #f2b60f;
-  background: rgba(242, 182, 15, 0.1);
+  color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .nav-icon {
   font-size: 1rem;
-  color: #f2b60f;
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -194,11 +196,13 @@
   cursor: pointer;
   padding: 0.5rem;
   border-radius: 6px;
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
+  color: var(--color-text-secondary);
 }
 
 .search-btn:hover {
-  background: rgba(242, 182, 15, 0.1);
+  background: var(--color-primary-light);
+  color: var(--color-primary);
 }
 
 /* Mobile Menu Toggle */
@@ -219,14 +223,14 @@
 .hamburger {
   width: 20px;
   height: 2px;
-  background: #333;
-  transition: all 0.3s ease;
+  background: var(--color-text);
+  transition: all var(--transition-normal);
   border-radius: 2px;
   transform-origin: center;
 }
 
 .menu-toggle:hover .hamburger {
-  background: #f2b60f;
+  background: var(--color-primary);
 }
 
 /* Hamburger Animation */
@@ -286,7 +290,7 @@
     width: 28px;
     height: 28px;
     font-size: 1.3rem;
-    color: #f2b60f;
+    color: var(--color-primary);
   }
   
   .header-nav {
@@ -304,9 +308,9 @@
     top: 100%;
     left: 0;
     right: 0;
-    background: #ffffff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    border-top: 1px solid #f0f0f0;
+    background: var(--color-bg-primary);
+    box-shadow: var(--shadow-lg);
+    border-top: 1px solid var(--color-border);
   }
 
   .header-nav.mobile-open .nav-list {
@@ -322,7 +326,7 @@
   .header-nav.mobile-open .nav-link {
     display: flex;
     padding: 1rem 20px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--color-border);
     border-radius: 0;
   }
 
@@ -366,7 +370,7 @@
     width: 26px;
     height: 26px;
     font-size: 1.2rem;
-    color: #f2b60f;
+    color: var(--color-primary);
   }
   
   .header-title-main {
@@ -390,44 +394,44 @@
 /* Dark Mode Support */
 @media (prefers-color-scheme: dark) {
   .header {
-    background: #1a1a1a;
-    box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    background: var(--color-bg-primary);
+    box-shadow: var(--shadow-md);
   }
 
   .logo-text {
-    color: #ffffff;
+    color: var(--color-text);
   }
 
   .nav-link {
-    color: #cccccc;
+    color: var(--color-text-secondary);
   }
 
   .nav-link:hover {
-    color: #f2b60f;
+    color: var(--color-primary);
   }
 
   .hamburger {
-    background: #ffffff;
+    background: var(--color-text);
   }
 
   .menu-toggle:hover .hamburger {
-    background: #f2b60f;
+    background: var(--color-primary);
   }
 
   .header-nav.mobile-open {
-    background: #1a1a1a;
-    border-top: 1px solid #333;
+    background: var(--color-bg-primary);
+    border-top: 1px solid var(--color-border);
   }
 
   .header-nav.mobile-open .nav-link {
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid var(--color-border);
   }
 }
 
 /* Focus States for Accessibility */
 .nav-link:focus,
 .menu-toggle:focus {
-  outline: 2px solid #f2b60f;
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
@@ -437,5 +441,5 @@
 }
 
 .header * {
-  transition: all 0.3s ease;
+  transition: all var(--transition-normal);
 }

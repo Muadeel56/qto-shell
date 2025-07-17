@@ -1,0 +1,95 @@
+/* Import QTO Theme tokens */
+@import '../../../qto-theme/src/styles/tokens.css';
+@import '../../../qto-theme/src/styles/theme-toggle.css';
+
+/* Apply theme-aware styles */
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text);
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Main content area */
+.main-content {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text);
+}
+
+/* Header theme support */
+.header {
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.header-title {
+  color: var(--color-text);
+}
+
+.header-breadcrumbs {
+  color: var(--color-text-secondary);
+}
+
+.breadcrumb-item {
+  color: var(--color-text-muted);
+}
+
+.breadcrumb-separator {
+  color: var(--color-text-light);
+}
+
+/* Search input theme support */
+.search-input {
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.search-input:focus {
+  border-color: var(--color-border-focus);
+}
+
+/* Navigation theme support */
+.nav-item {
+  color: var(--color-text-secondary);
+}
+
+.nav-item:hover {
+  color: var(--color-text);
+  background-color: var(--color-bg-secondary);
+}
+
+/* Mobile menu theme support */
+.mobile-menu {
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+}
+
+.mobile-menu-item {
+  color: var(--color-text-secondary);
+}
+
+.mobile-menu-item:hover {
+  color: var(--color-text);
+  background-color: var(--color-bg-secondary);
+}
+
+/* Theme toggle in header */
+.header-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.header-theme-toggle .theme-toggle {
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-secondary);
+  padding: var(--spacing-xs);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+}
+
+.header-theme-toggle .theme-toggle:hover {
+  background: var(--color-bg-tertiary);
+  border-color: var(--color-primary);
+}

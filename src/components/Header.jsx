@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Home, Bell, MessageCircle, User, Search } from 'lucide-react';
+import ThemeToggle from '../../../qto-theme/src/components/ThemeToggle.jsx';
 import './Header.css';
 
 const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null }) => {
@@ -88,6 +89,9 @@ const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null }) => {
         </nav>
 
         <div className="header-actions">
+          <div className="header-theme-toggle">
+            <ThemeToggle size="sm" />
+          </div>
           <button className="search-btn" aria-label="Search">
             <Search size={18} />
           </button>
