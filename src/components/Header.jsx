@@ -1,27 +1,88 @@
-import React, { useState } from 'react';
-import { Home, Bell, MessageCircle, User, Search } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Home, Search, ChevronRight } from 'lucide-react';
+import { getMicroFrontend } from '../services/microFrontendRegistry.jsx';
 import ThemeToggle from '../../../qto-theme/src/components/ThemeToggle.jsx';
 import './Header.css';
 
-const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null, parentMicroFrontend = null }) => {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+  const searchRef = useRef(null);
+  const searchInputRef = useRef(null);
 
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(!isMobileMenuOpen);
+  // Handle click outside to close search
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsSearchExpanded(false);
+        setSearchQuery('');
+      }
+    };
+
+    const handleEscapeKey = (event) => {
+      if (event.key === 'Escape' && isSearchExpanded) {
+        setIsSearchExpanded(false);
+        setSearchQuery('');
+      }
+    };
+
+    if (isSearchExpanded) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('keydown', handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, [isSearchExpanded]);
+
+  const handleSearchToggle = () => {
+    setIsSearchExpanded(!isSearchExpanded);
+    if (!isSearchExpanded) {
+      // Focus the search input when expanded
+      setTimeout(() => {
+        if (searchInputRef.current) {
+          searchInputRef.current.focus();
+        }
+      }, 100);
+    } else {
+      setSearchQuery('');
+    }
   };
 
-  const closeMobileMenu = () => {
-    setIsMobileMenuOpen(false);
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      console.log('Search query:', searchQuery);
+      // Implement search functionality here
+      // Optionally close search after submit on mobile
+      if (window.innerWidth <= 768) {
+        setIsSearchExpanded(false);
+      }
+    }
   };
 
   // Determine what to show in the header title
   const getHeaderTitle = () => {
     if (activeMicroFrontend) {
+      const breadcrumbs = ['QTO House'];
+      
+      // Add parent micro-frontend to breadcrumbs if exists
+      if (parentMicroFrontend) {
+        const parentConfig = getMicroFrontend(parentMicroFrontend);
+        if (parentConfig) {
+          breadcrumbs.push(parentConfig.name);
+        }
+      }
+      
+      breadcrumbs.push(activeMicroFrontend.name);
+      
       return {
         title: activeMicroFrontend.name,
         subtitle: activeMicroFrontend.description,
         icon: activeMicroFrontend.icon(),
-        breadcrumbs: ['QTO House', activeMicroFrontend.name],
+        breadcrumbs: breadcrumbs,
         isMicroFrontend: true
       };
     }
@@ -48,7 +109,7 @@ const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null }) => {
                   <span key={index} className="breadcrumb-container">
                     <span className="breadcrumb-item" title={crumb}>{crumb}</span>
                     {index < headerInfo.breadcrumbs.length - 1 && (
-                      <span className="breadcrumb-separator">›</span>
+                      <ChevronRight size={14} className="breadcrumb-separator" />
                     )}
                   </span>
                 ))}
@@ -67,52 +128,32 @@ const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null }) => {
             </div>
           </div>
         </div>
-        
-        <nav className={`header-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
-          <ul className="nav-list">
-            <li className="nav-item">
-              <a href="#notifications" className="nav-link" onClick={closeMobileMenu}>
-                <span className="nav-icon">
-                  <Bell size={18} />
-                </span>
-                Notifications
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#messages" className="nav-link" onClick={closeMobileMenu}>
-                <span className="nav-icon">
-                  <MessageCircle size={18} />
-                </span>
-                Messages
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#profile" className="nav-link" onClick={closeMobileMenu}>
-                <span className="nav-icon">
-                  <User size={18} />
-                </span>
-                Profile
-              </a>
-            </li>
-          </ul>
-        </nav>
 
         <div className="header-actions">
+          <div className="header-search" ref={searchRef}>
+            <form onSubmit={handleSearchSubmit} className={`search-form ${isSearchExpanded ? 'expanded' : ''}`}>
+              <input
+                ref={searchInputRef}
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="search-input"
+              />
+              <button 
+                type="button"
+                className="search-toggle"
+                onClick={handleSearchToggle}
+                aria-label="Toggle search"
+              >
+                <Search size={18} />
+              </button>
+            </form>
+          </div>
+          
           <div className="header-theme-toggle">
             <ThemeToggle size="sm" />
           </div>
-          <button className="search-btn" aria-label="Search">
-            <Search size={18} />
-          </button>
-          <button 
-            className={`menu-toggle ${isMobileMenuOpen ? 'active' : ''}`}
-            aria-label="Toggle menu"
-            onClick={toggleMobileMenu}
-          >
-            <span className="hamburger"></span>
-            <span className="hamburger"></span>
-            <span className="hamburger"></span>
-          </button>
         </div>
       </div>
     </header>

@@ -1,14 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { loadMicroFrontend, getMicroFrontend } from '../services/microFrontendRegistry.jsx';
+import { loadMicroFrontend, getMicroFrontend, getChildMicroFrontend } from '../services/microFrontendRegistry.jsx';
 import './MicroFrontendLoader.css';
 
-const MicroFrontendLoader = ({ microFrontendId, onError }) => {
+const MicroFrontendLoader = ({ microFrontendId, parentId, onError }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const containerRef = useRef(null);
   
   // Get micro frontend config for display name
-  const microFrontendConfig = microFrontendId ? getMicroFrontend(microFrontendId) : null;
+  const microFrontendConfig = microFrontendId 
+    ? (parentId 
+        ? getChildMicroFrontend(parentId, microFrontendId)
+        : getMicroFrontend(microFrontendId)
+      )
+    : null;
 
   useEffect(() => {
     if (!microFrontendId) {
@@ -21,7 +26,7 @@ const MicroFrontendLoader = ({ microFrontendId, onError }) => {
         setLoading(true);
         setError(null);
         
-        const config = loadMicroFrontend(microFrontendId);
+        const config = loadMicroFrontend(microFrontendId, parentId);
         
         // Clear previous content
         if (containerRef.current) {
