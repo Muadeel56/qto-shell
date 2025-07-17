@@ -106,11 +106,82 @@
 @media (max-width: 768px) {
   .micro-frontend-container {
     min-height: calc(100vh - 120px);
+    border-radius: 4px; /* Reduced border radius */
+    margin: 0; /* Remove any margin */
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow */
   }
   
   .micro-frontend-loader,
   .micro-frontend-error,
   .micro-frontend-placeholder {
     height: 300px;
+    padding: 1rem; /* Add padding to content instead of container */
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .micro-frontend-container {
+    min-height: calc(100vh - 100px);
+    border-radius: 0; /* No border radius on small screens */
+    margin: 0;
+    box-shadow: none; /* Remove shadow to save space */
+  }
+  
+  .micro-frontend-loader,
+  .micro-frontend-error,
+  .micro-frontend-placeholder {
+    height: 250px;
+    padding: 0.5rem; /* Minimal padding */
+  }
+  
+  .micro-frontend-loader p {
+    font-size: 0.9rem;
+  }
+  
+  .micro-frontend-placeholder h2 {
+    font-size: 1.2rem;
+  }
+  
+  .micro-frontend-placeholder p {
+    font-size: 0.95rem;
+  }
+}
+
+/* Extra Small Mobile Styles */
+@media (max-width: 360px) {
+  .micro-frontend-container {
+    min-height: calc(100vh - 80px);
+  }
+  
+  .micro-frontend-loader,
+  .micro-frontend-error,
+  .micro-frontend-placeholder {
+    height: 200px;
+    padding: 0.25rem; /* Minimal padding */
+    gap: 0.5rem; /* Reduced gap */
+  }
+  
+  .loader-spinner {
+    width: 30px;
+    height: 30px;
+    border-width: 3px;
+  }
+  
+  .micro-frontend-loader p {
+    font-size: 0.8rem;
+  }
+  
+  .micro-frontend-placeholder h2 {
+    font-size: 1rem;
+  }
+  
+  .micro-frontend-placeholder p {
+    font-size: 0.85rem;
+  }
+  
+  .micro-frontend-error button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
   }
 }

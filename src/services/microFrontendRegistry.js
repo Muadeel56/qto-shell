@@ -49,7 +49,7 @@ export const getMicroFrontend = (id) => {
 // Get all active micro-frontends
 export const getActiveMicroFrontends = () => {
   return Object.entries(microFrontendRegistry)
-    .filter(([_, config]) => config.isActive)
+    .filter(([, config]) => config.isActive)
     .map(([id, config]) => ({ id, ...config }));
 };
 
@@ -60,7 +60,7 @@ export const loadMicroFrontend = (id) => {
     throw new Error(`Micro-frontend '${id}' not found`);
   }
   
-  const isDevelopment = process.env.NODE_ENV === 'development';
+  const isDevelopment = import.meta.env.DEV;
   const url = isDevelopment ? config.url : config.productionUrl;
   
   return {

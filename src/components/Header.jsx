@@ -45,16 +45,25 @@ const Header = ({ sidebarCollapsed = false, activeMicroFrontend = null }) => {
             <div className="header-text">
               <div className="header-breadcrumbs">
                 {headerInfo.breadcrumbs.map((crumb, index) => (
-                  <span key={index}>
-                    <span className="breadcrumb-item">{crumb}</span>
+                  <span key={index} className="breadcrumb-container">
+                    <span className="breadcrumb-item" title={crumb}>{crumb}</span>
                     {index < headerInfo.breadcrumbs.length - 1 && (
                       <span className="breadcrumb-separator">›</span>
                     )}
                   </span>
                 ))}
               </div>
-              <h4 className={headerInfo.isMicroFrontend ? 'micro-frontend-title' : ''}>{headerInfo.title}</h4>
-              {!headerInfo.isMicroFrontend && <span className="header-subtitle">{headerInfo.subtitle}</span>}
+              <h4 
+                className={`header-main-title ${headerInfo.isMicroFrontend ? 'micro-frontend-title' : ''}`}
+                title={headerInfo.title}
+              >
+                {headerInfo.title}
+              </h4>
+              {!headerInfo.isMicroFrontend && (
+                <span className="header-subtitle" title={headerInfo.subtitle}>
+                  {headerInfo.subtitle}
+                </span>
+              )}
             </div>
           </div>
         </div>

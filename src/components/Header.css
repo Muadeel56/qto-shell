@@ -18,18 +18,33 @@
   align-items: center;
   justify-content: space-between;
   height: 70px;
+  gap: 1rem; /* Add gap between flex items */
+}
+
+/* New flex layout for better spacing */
+.header-main-section {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 1rem;
+  min-width: 0;
 }
 
 /* Header Title */
 .header-title {
   display: flex;
   align-items: center;
+  flex: 1;
+  min-width: 0; /* Allow flex item to shrink */
+  max-width: 100%;
 }
 
 .header-title-main {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  width: 100%;
+  min-width: 0; /* Allow flex item to shrink */
 }
 
 .header-icon {
@@ -56,6 +71,8 @@
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
+  min-width: 0; /* Allow flex item to shrink */
+  flex: 1;
 }
 
 .header-breadcrumbs {
@@ -63,6 +80,14 @@
   align-items: center;
   gap: 0.25rem;
   margin-bottom: 0.2rem;
+  min-width: 0; /* Allow flex item to shrink */
+}
+
+.breadcrumb-container {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 0; /* Allow flex item to shrink */
 }
 
 .breadcrumb-item {
@@ -70,6 +95,10 @@
   color: var(--color-text-muted);
   font-weight: 400;
   transition: color var(--transition-normal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px; /* Limit individual breadcrumb width */
 }
 
 .header-title:has(.micro-frontend-title) .breadcrumb-item:last-child {
@@ -81,9 +110,10 @@
   font-size: 0.75rem;
   color: var(--color-text-light);
   margin: 0 0.25rem;
+  flex-shrink: 0;
 }
 
-.header-title h4 {
+.header-main-title {
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--color-text);
@@ -91,9 +121,13 @@
   letter-spacing: -0.5px;
   line-height: 1.2;
   transition: all var(--transition-normal);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
-.header-title h4.micro-frontend-title {
+.header-main-title.micro-frontend-title {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--color-primary);
@@ -102,7 +136,7 @@
   filter: drop-shadow(0 0 4px rgba(242, 182, 15, 0.3));
 }
 
-.header-title h4.micro-frontend-title::after {
+.header-main-title.micro-frontend-title::after {
   content: '';
   position: absolute;
   bottom: -2px;
@@ -135,6 +169,10 @@
   color: var(--color-text-secondary);
   font-weight: 400;
   line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* Navigation */
@@ -248,38 +286,46 @@
 
 /* Responsive Design */
 
+/* Large Desktop Styles */
+@media (max-width: 1200px) {
+  .header-container {
+    padding: 0 1.5rem;
+  }
+  
+  .header-main-title {
+    font-size: 1.25rem;
+    max-width: 300px;
+  }
+  
+  .header-main-title.micro-frontend-title {
+    font-size: 1.35rem;
+    max-width: 280px;
+  }
+  
+  .breadcrumb-item {
+    max-width: 120px;
+  }
+}
+
 /* Tablet Styles */
 @media (max-width: 1024px) {
   .header-container {
     padding: 0 1.5rem;
   }
-}
-
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .header {
-    padding-left: 70px; /* Space for mobile sidebar toggle */
-  }
   
-  .header-container {
-    padding: 0 1rem;
-    height: 60px;
-  }
-  
-  .header-title h4 {
+  .header-main-title {
     font-size: 1.2rem;
+    max-width: 250px;
   }
   
-  .header-title h4.micro-frontend-title {
+  .header-main-title.micro-frontend-title {
     font-size: 1.3rem;
-  }
-  
-  .header-subtitle {
-    font-size: 0.75rem;
+    max-width: 230px;
   }
   
   .breadcrumb-item {
     font-size: 0.7rem;
+    max-width: 100px;
   }
   
   .breadcrumb-separator {
@@ -287,10 +333,77 @@
   }
   
   .header-icon {
-    width: 28px;
-    height: 28px;
-    font-size: 1.3rem;
-    color: var(--color-primary);
+    width: 30px;
+    height: 30px;
+    font-size: 1.4rem;
+  }
+  
+  .header-title-main {
+    gap: 0.6rem;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .header {
+    padding-left: 60px; /* Reduced space for mobile sidebar toggle */
+  }
+  
+  .header-container {
+    padding: 0 0.5rem; /* Reduced padding */
+    height: 56px; /* Reduced height */
+  }
+  
+  .header-title {
+    max-width: calc(100% - 100px); /* Reserve space for actions */
+  }
+  
+  .header-main-title {
+    font-size: 1.1rem;
+    max-width: 200px;
+  }
+  
+  .header-main-title.micro-frontend-title {
+    font-size: 1.2rem;
+    max-width: 180px;
+  }
+  
+  .header-subtitle {
+    font-size: 0.75rem;
+    max-width: 150px;
+  }
+  
+  .breadcrumb-item {
+    font-size: 0.65rem;
+    max-width: 80px;
+  }
+  
+  .breadcrumb-separator {
+    font-size: 0.65rem;
+    margin: 0 0.15rem;
+  }
+  
+  .header-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 1.2rem;
+  }
+  
+  .header-title-main {
+    gap: 0.3rem; /* Reduced gap */
+  }
+  
+  .header-text {
+    gap: 0.05rem; /* Reduced gap between breadcrumbs and title */
+  }
+  
+  .header-breadcrumbs {
+    gap: 0.15rem; /* Reduced gap */
+    margin-bottom: 0.1rem; /* Reduced margin */
+  }
+  
+  .breadcrumb-container {
+    gap: 0.15rem; /* Reduced gap */
   }
   
   .header-nav {
@@ -325,13 +438,134 @@
 
   .header-nav.mobile-open .nav-link {
     display: flex;
-    padding: 1rem 20px;
+    padding: 0.75rem 1rem; /* Reduced padding */
     border-bottom: 1px solid var(--color-border);
     border-radius: 0;
   }
 
   .header-nav.mobile-open .nav-link:last-child {
     border-bottom: none;
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  .header {
+    padding-left: 50px; /* Further reduced for small screens */
+  }
+  
+  .header-container {
+    padding: 0 0.25rem; /* Minimal padding */
+    height: 52px; /* Reduced height */
+  }
+  
+  .header-title {
+    max-width: calc(100% - 80px); /* Less space for actions */
+  }
+  
+  .header-main-title {
+    font-size: 1rem;
+    max-width: 150px;
+  }
+  
+  .header-main-title.micro-frontend-title {
+    font-size: 1.1rem;
+    max-width: 140px;
+  }
+  
+  .header-subtitle {
+    font-size: 0.7rem;
+    max-width: 120px;
+  }
+  
+  .breadcrumb-item {
+    font-size: 0.6rem;
+    max-width: 60px;
+  }
+  
+  .breadcrumb-separator {
+    font-size: 0.6rem;
+    margin: 0 0.1rem;
+  }
+  
+  .header-icon {
+    width: 26px;
+    height: 26px;
+    font-size: 1.2rem;
+  }
+  
+  .header-title-main {
+    gap: 0.4rem;
+  }
+  
+  .search-btn {
+    padding: 0.4rem;
+    font-size: 1rem;
+  }
+  
+  .header-actions {
+    gap: 0.5rem;
+  }
+}
+
+/* Extra Small Mobile Styles */
+@media (max-width: 360px) {
+  .header-container {
+    padding: 0 0.5rem;
+    height: 52px;
+  }
+  
+  .header-title {
+    max-width: calc(100% - 80px);
+  }
+  
+  .header-main-title {
+    font-size: 0.95rem;
+    max-width: 120px;
+  }
+  
+  .header-main-title.micro-frontend-title {
+    font-size: 1rem;
+    max-width: 110px;
+  }
+  
+  .header-subtitle {
+    font-size: 0.65rem;
+    max-width: 100px;
+  }
+  
+  .breadcrumb-item {
+    font-size: 0.55rem;
+    max-width: 50px;
+  }
+  
+  .breadcrumb-separator {
+    font-size: 0.55rem;
+    margin: 0 0.05rem;
+  }
+  
+  .header-icon {
+    width: 24px;
+    height: 24px;
+    font-size: 1.1rem;
+  }
+  
+  .header-title-main {
+    gap: 0.3rem;
+  }
+  
+  .header-actions {
+    gap: 0.3rem;
+  }
+  
+  .search-btn {
+    padding: 0.3rem;
+    font-size: 0.9rem;
+  }
+  
+  /* Hide breadcrumbs on very small screens */
+  .header-breadcrumbs {
+    display: none;
   }
 }
 

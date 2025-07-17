@@ -30,7 +30,7 @@ const MicroFrontendLoader = ({ microFrontendId, onError }) => {
 
         // For development, you might use iframe approach
         // For production, you'd use module federation or single-spa
-        if (process.env.NODE_ENV === 'development') {
+        if (import.meta.env.DEV) {
           // Create iframe for development
           const iframe = document.createElement('iframe');
           iframe.src = config.url;
@@ -38,6 +38,22 @@ const MicroFrontendLoader = ({ microFrontendId, onError }) => {
           iframe.style.height = '100%';
           iframe.style.border = 'none';
           iframe.style.borderRadius = '8px';
+          
+          // Add responsive styling for mobile
+          const mediaQuery = window.matchMedia('(max-width: 768px)');
+          const handleMediaChange = (e) => {
+            if (e.matches) {
+              iframe.style.borderRadius = '4px';
+            } else {
+              iframe.style.borderRadius = '8px';
+            }
+          };
+          
+          // Apply initial styles
+          handleMediaChange(mediaQuery);
+          
+          // Listen for changes
+          mediaQuery.addListener(handleMediaChange);
           
           if (containerRef.current) {
             containerRef.current.appendChild(iframe);
